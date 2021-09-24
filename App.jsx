@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity
+  Button, StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PropTypes from 'prop-types';
 
-export default function App() {
+function HomeScreen({ navigation }) {
+  HomeScreen.propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  };
   const [destination, setDestination] = useState('');
   const [cities, addCity] = useState([{ id: 0, name: 'Paris', seen: 'false' }]);
   const [id, incr] = useState(1);
@@ -63,7 +71,32 @@ export default function App() {
           {cities.map((e) => <Text key={e.id} style={{ fontSize: 100 }}>{ e.name }</Text>)}
         </ScrollView>
       </View>
+      <Button
+        title="Go to SecondScreen"
+        onPress={() => navigation.navigate('SecondScreen')}
+      />
       <View style={styles.footer}><Text>footer</Text></View>
     </View>
+  );
+}
+
+function SecondScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>hého</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function app() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="SecondScreen" component={SecondScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
