@@ -1,25 +1,30 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,
+  StyleSheet, View, Text,
 } from 'react-native';
+import AppLoading from 'expo-app-loading';
+import { Button, Image, } from 'react-native-elements';
+import LottieView from 'lottie-react-native';
+import {
+  useFonts,
+  Nunito_200ExtraLight,
+  Nunito_300Light,
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+} from '@expo-google-fonts/nunito';
+
+const animation = require('./assets/1088-shape-types.json');
 
 export default function App() {
-  const [destination, setDestination] = useState('');
-  const [cities, addCity] = useState([{ id: 0, name: 'Paris', seen: 'false' }]);
-  const [id, incr] = useState(1);
-
-  const handleTextChange = (e) => {
-    setDestination(e);
-  };
-
-  const handleButtonPress = () => {
-    const cityToAdd = {
-      id, name: destination, seen: false,
-    };
-    addCity([...cities, cityToAdd]);
-    setDestination('');
-    incr(id + 1);
-  };
+  const [fontsLoaded] = useFonts({
+    Nunito_200ExtraLight,
+    Nunito_400Regular,
+    Nunito_300Light,
+    Nunito_700Bold,
+  });
 
   const styles = StyleSheet.create({
     container: {
@@ -30,7 +35,7 @@ export default function App() {
       flex: 1,
       backgroundColor: 'white',
       alignItems: 'center',
-      flexDirection: 'row',
+      marginTop: 24,
       justifyContent: 'center',
     },
     footer: {
@@ -40,30 +45,57 @@ export default function App() {
       justifyContent: 'center',
     },
     main: {
-      flex: 1,
-      backgroundColor: 'grey',
+      flex: 8,
+      backgroundColor: 'white',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TextInput
-          style={{ padding: 10 }}
-          value={destination}
-          onChangeText={handleTextChange}
-          placeholder="Enter Destination here"
+      <View style={styles.main}>
+        <LottieView
+          autoPlay
+          loop
+          autoSize
+          resizeMode="cover"
+          speed={0.5}
+          style={{
+            width: 400,
+            height: 400,
+            backgroundColor: 'white',
+            position: 'absolute',
+          }}
+          source={animation}
         />
-        <TouchableOpacity style={{ backgroundColor: '#DDDDDD', padding: 10 }} onPress={handleButtonPress}>
-          <Text>Add</Text>
-        </TouchableOpacity>
+        <Text style={{
+          fontFamily: 'Nunito_700Bold',
+          fontSize: 34,
+        }}
+        >
+          Welcome
+        </Text>
+        <Text style={{
+          fontFamily: 'Nunito_400Regular',
+          fontSize: 34,
+        }}
+        >
+          on
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'Nunito_200ExtraLight',
+            fontSize: 34,
+          }}
+        >
+          Places
+        </Text>
+
       </View>
-      <View style={{ flex: 6 }}>
-        <ScrollView vertical style={styles.main} contentContainerStyle={{ width: '100%', alignItems: 'center' }}>
-          {cities.map((e) => <Text key={e.id} style={{ fontSize: 100 }}>{ e.name }</Text>)}
-        </ScrollView>
-      </View>
-      <View style={styles.footer}><Text>footer</Text></View>
     </View>
   );
 }
