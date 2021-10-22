@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import call from 'react-native-phone-call';
 
 import { IconButton } from '../components';
 import Firebase from '../config/firebase';
@@ -34,12 +35,23 @@ const auth = Firebase.auth();
 
 export default function HomeScreen() {
   const { user } = useContext(AuthenticatedUserContext);
+  const [CallNumber, setNumber] = useState('');
   const handleSignOut = async () => {
     try {
       await auth.signOut();
     } catch (error) {
       // console.log(error);
     }
+  };
+  const handleNumberChange = (e) => {
+    setNumber(e);
+  };
+  const HandleCallButton = () => {
+    const args = {
+      number: CallNumber,
+      prompt: false,
+    };
+    call(args).catch();
   };
   return (
     <View style={styles.container}>
@@ -58,6 +70,15 @@ export default function HomeScreen() {
           onPress={handleSignOut}
         />
       </View>
+      <TextInput
+        style={{ padding: 10 }}
+        value={CallNumber}
+        onChangeText={handleNumberChange}
+        placeholder="Enter Phone Number here"
+      />
+      <TouchableOpacity style={{ backgroundColor: '#ffffff', padding: 10 }} onPress={HandleCallButton}>
+        <Text>Call</Text>
+      </TouchableOpacity>
       <Text style={styles.text}>
         Your UID is:
         {' '}
