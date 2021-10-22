@@ -18,6 +18,10 @@
         "react"
     ],
     "rules": {
-        "linebreak-style": ["error", "windows"]
+        "linebreak-style": ["error", "windows"],
+        "react/style-prop-object": ["error", {
+            "allow": ["StatusBar"]
+        }],
+        "no-console": ["error", { "allow": ["warn", "error"] }]
     }
 }
