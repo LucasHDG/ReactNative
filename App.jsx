@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,
+  Button, StyleSheet, Text, View, TextInput, TouchableOpacity,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import call from 'react-native-phone-call';
 
 const argsTest = {
-  number: '0681451292',
+  number: '0645270761',
   prompt: false,
 };
 
@@ -19,13 +19,6 @@ function HomeScreen({ navigation }) {
     }).isRequired,
   };
   const [CallNumber, setNumber] = useState('');
-  const [destination, setDestination] = useState('');
-  const [cities, addCity] = useState([{ id: 0, name: 'Paris', seen: 'false' }]);
-  const [id, incr] = useState(1);
-
-  const handleTextChange = (e) => {
-    setDestination(e);
-  };
 
   const handleNumberChange = (e) => {
     setNumber(e);
@@ -37,15 +30,6 @@ function HomeScreen({ navigation }) {
       prompt: false,
     };
     call(args).catch();
-  };
-
-  const handleButtonPress = () => {
-    const cityToAdd = {
-      id, name: destination, seen: false,
-    };
-    addCity([...cities, cityToAdd]);
-    setDestination('');
-    incr(id + 1);
   };
 
   const styles = StyleSheet.create({
@@ -87,11 +71,12 @@ function HomeScreen({ navigation }) {
 
       </View>
 
-      <View style={{ flex: 6 }}>
-        <ScrollView vertical style={styles.main} contentContainerStyle={{ width: '100%', alignItems: 'center' }}>
+      {/* <View style={{ flex: 6 }}>
+          <ScrollView vertical style={styles.main} contentContainerStyle=
+          {{ width: '100%', alignItems: 'center' }}>
           {cities.map((e) => <Text key={e.id} style={{ fontSize: 100 }}>{ e.name }</Text>)}
         </ScrollView>
-      </View>
+      </View> */}
       <Button
         title="Call"
         onPress={() => call(argsTest).catch()}
