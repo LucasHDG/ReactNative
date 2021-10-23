@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet, Text, View, TextInput, TouchableOpacity,
+} from 'react-native';
 import call from 'react-native-phone-call';
 
 import { IconButton } from '../components';
@@ -51,7 +53,7 @@ export default function HomeScreen() {
       number: CallNumber,
       prompt: false,
     };
-    call(args).catch();
+    call(args).catch((error) => console.error(error));
   };
   return (
     <View style={styles.container}>
@@ -75,6 +77,7 @@ export default function HomeScreen() {
         value={CallNumber}
         onChangeText={handleNumberChange}
         placeholder="Enter Phone Number here"
+        keyboardType="numeric"
       />
       <TouchableOpacity style={{ backgroundColor: '#ffffff', padding: 10 }} onPress={HandleCallButton}>
         <Text>Call</Text>
