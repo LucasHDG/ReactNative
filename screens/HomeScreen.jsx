@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import {
   StyleSheet, Text, View, TextInput, TouchableOpacity,
 } from 'react-native';
-import call from 'react-native-phone-call';
+import * as Linking from 'expo-linking';
 
 import { IconButton } from '../components';
 import Firebase from '../config/firebase';
@@ -49,11 +49,9 @@ export default function HomeScreen() {
     setNumber(e);
   };
   const HandleCallButton = () => {
-    const args = {
-      number: CallNumber,
-      prompt: false,
-    };
-    call(args).catch((error) => console.error(error));
+    Linking.openURL(`tel://${CallNumber}`);
+
+    // call(args).catch((error) => console.error(error));
   };
   return (
     <View style={styles.container}>
