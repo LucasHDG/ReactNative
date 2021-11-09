@@ -1,13 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useState } from 'react';
 import {
-  StyleSheet, Text, View, TextInput, TouchableOpacity,
+  StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, SafeAreaView, ScrollView, Button,
 } from 'react-native';
 import * as Linking from 'expo-linking';
 
 import { IconButton } from '../components';
 import Firebase from '../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+
+const Contacts = [
+  { key: 'Devin ', number: '0645270761' },
+  { key: 'Dan ', number: '0645270761' },
+  { key: 'Dominic ', number: '0645270761' },
+  { key: 'Jackson ', number: '0645270761' },
+  { key: 'James ', number: '0645270761' },
+  { key: 'Joel ', number: '0645270761' },
+  { key: 'John ', number: '0645270761' },
+  { key: 'Jillian ', number: '0645270761' },
+  { key: 'Jimmy ', number: '0645270761' },
+  { key: 'Julie ', number: '0645270761' },
+];
 
 const styles = StyleSheet.create({
   container: {
@@ -48,8 +61,9 @@ export default function HomeScreen() {
   const handleNumberChange = (e) => {
     setNumber(e);
   };
-  const HandleCallButton = () => {
-    Linking.openURL(`tel://${CallNumber}`);
+  const HandleCallButton = (e, number) => {
+    e.preventDefault();
+    Linking.openURL(`tel://${number}`);
 
     // call(args).catch((error) => console.error(error));
   };
@@ -80,6 +94,22 @@ export default function HomeScreen() {
       <TouchableOpacity style={{ backgroundColor: '#ffffff', padding: 10 }} onPress={HandleCallButton}>
         <Text>Call</Text>
       </TouchableOpacity>
+      <SafeAreaView>
+        <ScrollView style={styles.scrollView}>
+          <FlatList
+            data={Contacts}
+            renderItem={({ item }) => (
+              <Button
+                style={styles.item}
+                title={item.key + item.number}
+                onPress={(e) => HandleCallButton(e, item.number)}
+              >
+                Call
+              </Button>
+            )}
+          />
+        </ScrollView>
+      </SafeAreaView>
       <Text style={styles.text}>
         Your UID is:
         {' '}
