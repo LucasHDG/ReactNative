@@ -72,7 +72,7 @@ export default function HomeScreen() {
           onPress={handleSignOut}
         />
       </View>
-      <View style={{ backgroundColor: theme.ONBACK }}>
+      <View style={{ backgroundColor: theme.ONBACK, marginBottom: 20 }}>
         <TextInput
           style={{ padding: 10 }}
           value={CallNumber}

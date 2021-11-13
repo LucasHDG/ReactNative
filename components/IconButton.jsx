@@ -35,7 +35,7 @@ const IconButton = ({
 
 IconButton.propTypes = {
   color: PropTypes.string.isRequired,
-  size: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
   onPress: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
 };

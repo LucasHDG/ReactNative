@@ -101,7 +101,7 @@ export default function ContactsScreen() {
               <Button
                 title={concatNameNumber(item.name, item.phoneNumber)}
                 titleColor={theme.BACK}
-                color={theme.ONBACKTEXT}
+                color={theme.ONBACK}
                 onPress={(e) => HandleCallButton(e, item.phoneNumber)}
               >
                 Call
