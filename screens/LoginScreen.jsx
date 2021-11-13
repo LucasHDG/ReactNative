@@ -59,16 +59,8 @@ export default function LoginScreen({ navigation }) {
       <StatusBar style="dark-content" />
       <Text style={styles.title}>Login</Text>
       <InputField
-        inputStyle={{
-          fontSize: 14,
-        }}
-        containerStyle={{
-          backgroundColor: theme.ONBACK,
-          marginBottom: 20,
-        }}
         leftIcon="email"
         placeholder="Enter email"
-        autoCapitalize="none"
         keyboardType="email-address"
         textContentType="emailAddress"
         autoFocus
@@ -76,16 +68,8 @@ export default function LoginScreen({ navigation }) {
         onChangeText={(text) => setEmail(text)}
       />
       <InputField
-        inputStyle={{
-          fontSize: 14,
-        }}
-        containerStyle={{
-          backgroundColor: theme.ONBACK,
-          marginBottom: 20,
-        }}
         leftIcon="lock"
         placeholder="Enter password"
-        autoCapitalize="none"
         autoCorrect={false}
         secureTextEntry={passwordVisibility}
         textContentType="password"

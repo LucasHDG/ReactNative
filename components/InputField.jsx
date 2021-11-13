@@ -1,19 +1,22 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   View, StyleSheet, TextInput, TouchableOpacity,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
+import theme from '../styles/theme.style';
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 4,
     flexDirection: 'row',
     padding: 12,
+    backgroundColor: theme.ONBACK,
+    marginBottom: 20,
   },
   leftIcon: {
     marginRight: 10,
+    marginTop: 3,
   },
   input: {
     flex: 1,
@@ -23,20 +26,25 @@ const styles = StyleSheet.create({
   rightIcon: {
     alignSelf: 'center',
     marginLeft: 10,
+    marginTop: 3,
   },
 });
 
 const InputField = ({
   leftIcon,
-  iconColor = '#000',
+  iconColor,
   rightIcon,
-  inputStyle,
-  containerStyle,
-  placeholderTextColor = '#444',
+  placeholderTextColor ,
   handlePasswordVisibility,
-  ...rest
+  autoCorrect,
+  value,
+  onChangeText,
+  secureTextEntry,
+  textContentType,
+  keyboardType = 'default',
+  placeholder,
 }) => (
-  <View style={[styles.container, containerStyle]}>
+  <View style={styles.container}>
     {leftIcon ? (
       <MaterialCommunityIcons
         name={leftIcon}
@@ -46,9 +54,16 @@ const InputField = ({
       />
     ) : null}
     <TextInput
-      {...rest}
+      autoCorrect={autoCorrect}
+      value={value}
+      onChangeText={onChangeText}
+      secureTextEntry={secureTextEntry}
+      textContentType={textContentType}
+      keyboardType={keyboardType}
+      autoCapitalize="none"
+      placeholder={placeholder}
       placeholderTextColor={placeholderTextColor}
-      style={[styles.input, inputStyle]}
+      style={styles.input}
     />
     {rightIcon ? (
       <TouchableOpacity onPress={handlePasswordVisibility}>
@@ -62,5 +77,31 @@ const InputField = ({
     ) : null}
   </View>
 );
+InputField.propTypes = {
+  leftIcon: PropTypes.string,
+  iconColor: PropTypes.string,
+  rightIcon: PropTypes.string,
+  placeholderTextColor: PropTypes.string,
+  handlePasswordVisibility: PropTypes.func,
+  autoCorrect: PropTypes.bool,
+  secureTextEntry: PropTypes.bool,
+  textContentType: PropTypes.string.isRequired,
+  keyboardType: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChangeText: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+};
+
+InputField.defaultProps = {
+  leftIcon: '',
+  iconColor: theme.ONBACKTEXT,
+  rightIcon: '',
+  placeholderTextColor: theme.ONBACKTEXT,
+  handlePasswordVisibility: () => {},
+  autoCorrect: true,
+  secureTextEntry: false,
+  keyboardType: 'default',
+  placeholder: '',
+};
 
 export default InputField;
