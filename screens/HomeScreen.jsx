@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.BACK,
     paddingTop: 50,
-    paddingHorizontal: 12,
+    paddingHorizontal: 20,
   },
   row: {
     flexDirection: 'row',
