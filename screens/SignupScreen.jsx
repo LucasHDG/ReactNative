@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet, Text, View,
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 
-import { Button, InputField, ErrorMessage } from '../components';
+import { Button, InputField } from '../components';
 import Firebase from '../config/firebase';
 import theme from '../styles/theme.style';
-import Toast from 'react-native-root-toast';
 
 const styles = StyleSheet.create({
   container: {
