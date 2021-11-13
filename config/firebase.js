@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: Constants.manifest.extra.apiKey,

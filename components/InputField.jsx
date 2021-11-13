@@ -34,7 +34,7 @@ const InputField = ({
   leftIcon,
   iconColor,
   rightIcon,
-  placeholderTextColor ,
+  placeholderTextColor,
   handlePasswordVisibility,
   autoCorrect,
   value,

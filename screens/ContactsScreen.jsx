@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.BACK,
     paddingTop: 50,
-    paddingHorizontal: 12,
+    paddingHorizontal: 20,
   },
   row: {
     flexDirection: 'row',
@@ -31,10 +31,9 @@ const styles = StyleSheet.create({
     color: theme.ONBACKTEXT,
   },
   item: {
-    backgroundColor: theme.ONBACK,
+    backgroundColor: theme.ONBACKTEXT,
     padding: 10,
     marginVertical: 8,
-    marginHorizontal: 16,
   },
   scrollView: {
     marginBottom: 50,
@@ -84,7 +83,7 @@ export default function ContactsScreen() {
       <StatusBar style="dark-content" />
       <View style={styles.row}>
         <Text style={styles.title}>
-          Contact
+          Contacts
         </Text>
         <IconButton
           name="logout"

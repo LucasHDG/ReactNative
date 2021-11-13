@@ -1,10 +1,11 @@
 import {
-  StyleSheet, Text, View,
+  Image,
+  StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useEffect, useState } from 'react';
 import Toast from 'react-native-root-toast';
-
+import * as ImagePicker from 'expo-image-picker';
 import theme from '../styles/theme.style';
 import { IconButton, InputField, Button } from '../components';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
@@ -29,6 +30,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: theme.ONBACKTEXT,
   },
+  image: {
+    width: 80,
+    height: 80,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 20,
+  },
 });
 
 const auth = Firebase.auth();
@@ -37,6 +45,7 @@ export default function ProfileScreen() {
   const { user } = useContext(AuthenticatedUserContext);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [image, setImage] = useState('https://reactnative.dev/img/tiny_logo.png');
 
   const notify = (message) => {
     Toast.show(message, {
@@ -58,8 +67,38 @@ export default function ProfileScreen() {
       });
   };
 
+  const uploadImage = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const ref = Firebase.storage()
+      .ref()
+      .child('users-images')
+      .child(`${user.uid}.jpg`);
+    return ref.put(blob);
+  };
+
+  const handleImageCLick = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync();
+    if (!result.cancelled) {
+      setImage(result.uri);
+      await uploadImage(result.uri).catch((e) => notify(e));
+    }
+  };
+
+  const downloadImage = async () => {
+    const ref = await Firebase.storage('gs://reactnativecontacts-97d1a.appspot.com/')
+      .ref()
+      .child('users-images')
+      .child(`${user.uid}.jpg`);
+
+    ref.getDownloadURL()
+      .then((url) => { setImage(url); })
+      .catch(() => notify('No existing image'));
+  };
+
   useEffect(() => {
     Call();
+    downloadImage();
   }, []);
 
   const onSave = async () => {
@@ -99,6 +138,14 @@ export default function ProfileScreen() {
           onPress={handleSignOut}
         />
       </View>
+      <TouchableOpacity onPress={handleImageCLick}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: image,
+          }}
+        />
+      </TouchableOpacity>
       <InputField
         placeholder="Enter your name"
         textContentType="nickname"
