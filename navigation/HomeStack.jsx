@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 function HomeStack() {
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
       }}
@@ -26,6 +27,7 @@ function HomeStack() {
 function ContactsStack() {
   return (
     <Stack.Navigator
+      initialRouteName="Contacts"
       screenOptions={{
         headerShown: false,
       }}
@@ -38,6 +40,7 @@ function ContactsStack() {
 function ProfileStack() {
   return (
     <Stack.Navigator
+      initialRouteName="Profile"
       screenOptions={{
         headerShown: false,
       }}

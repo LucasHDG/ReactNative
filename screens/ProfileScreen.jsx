@@ -1,9 +1,8 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import theme from '../styles/theme.style';
 import { IconButton } from '../components';
-import { View } from 'react-native-web';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import Firebase from '../config/firebase';
 

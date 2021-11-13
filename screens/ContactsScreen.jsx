@@ -1,10 +1,10 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { StatusBar } from 'expo-status-bar';
+
 import theme from '../styles/theme.style';
 import Firebase from '../config/firebase';
-import React, { useContext } from 'react';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
-import { View } from 'react-native-web';
-import { StatusBar } from 'expo-status-bar';
 import { IconButton } from '../components';
 
 const styles = StyleSheet.create({
