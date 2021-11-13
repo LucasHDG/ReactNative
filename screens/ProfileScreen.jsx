@@ -112,7 +112,7 @@ export default function ProfileScreen() {
         .then(() => notify('Profile updated'))
         .catch((error) => notify(error));
     } else {
-      notify('Not valid name of phone number');
+      notify('Not a valid name or phone number');
     }
   };
 

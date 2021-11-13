@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: theme.ONBACKTEXT,
   },
   item: {
-    backgroundColor: theme.ONBACKTEXT,
+    backgroundColor: theme.ONBACK,
     padding: 10,
     marginVertical: 8,
   },
@@ -101,7 +101,7 @@ export default function ContactsScreen() {
               <Button
                 title={concatNameNumber(item.name, item.phoneNumber)}
                 titleColor={theme.BACK}
-                color={theme.ONBACK}
+                color={theme.ONBACKTEXT}
                 onPress={(e) => HandleCallButton(e, item.phoneNumber)}
               >
                 Call
