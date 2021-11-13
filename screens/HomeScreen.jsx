@@ -51,9 +51,9 @@ export default function HomeScreen() {
     setNumber(e);
   };
 
-  const HandleCallButton = (e, number) => {
+  const HandleCallButton = (e) => {
     e.preventDefault();
-    Linking.openURL(`tel://${number}`);
+    Linking.openURL(`tel://${CallNumber}`);
 
     // call(args).catch((error) => console.error(error));
   };
