@@ -44,7 +44,7 @@ export default function ProfileScreen() {
     });
   };
 
-  useEffect(() => {
+  const Call = async () => {
     const dbRef = Firebase.database(URL).ref();
     dbRef.child('users').child(user.uid).get().then((snapshot) => {
       if (snapshot.exists()) {
@@ -56,6 +56,10 @@ export default function ProfileScreen() {
       .catch((error) => {
         notify(error);
       });
+  };
+
+  useEffect(() => {
+    Call();
   }, []);
 
   const onSave = () => {
