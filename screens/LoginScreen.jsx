@@ -7,18 +7,19 @@ import {
 
 import { Button, InputField, ErrorMessage } from '../components';
 import Firebase from '../config/firebase';
+import theme from '../styles/theme.style';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e93b81',
+    backgroundColor: theme.BACK,
     paddingTop: 50,
     paddingHorizontal: 12,
   },
   title: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#fff',
+    color: theme.ONBACKTEXT,
     alignSelf: 'center',
     paddingBottom: 24,
   },
@@ -62,7 +63,7 @@ export default function LoginScreen({ navigation }) {
           fontSize: 14,
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: theme.ONBACK,
           marginBottom: 20,
         }}
         leftIcon="email"
@@ -79,7 +80,7 @@ export default function LoginScreen({ navigation }) {
           fontSize: 14,
         }}
         containerStyle={{
-          backgroundColor: '#fff',
+          backgroundColor: theme.ONBACK,
           marginBottom: 20,
         }}
         leftIcon="lock"
@@ -96,9 +97,9 @@ export default function LoginScreen({ navigation }) {
       {loginError ? <ErrorMessage error={loginError} visible /> : null}
       <Button
         onPress={onLogin}
-        backgroundColor="#f57c00"
+        backgroundColor={theme.PRIMARY}
         title="Login"
-        tileColor="#fff"
+        titleColor={theme.BACK}
         titleSize={20}
         containerStyle={{
           marginBottom: 24,
@@ -107,7 +108,7 @@ export default function LoginScreen({ navigation }) {
       <Button
         onPress={() => navigation.navigate('Signup')}
         title="Go to Signup"
-        color="#fff"
+        backgroundColor={theme.ONBACKTEXT}
       />
     </View>
   );

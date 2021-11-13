@@ -1,13 +1,8 @@
 import firebase from 'firebase/app';
 import Constants from 'expo-constants';
 
-import 'firebase/database';
 import 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import 'firebase/database';
 
 const firebaseConfig = {
   apiKey: Constants.manifest.extra.apiKey,
@@ -18,7 +13,6 @@ const firebaseConfig = {
   messagingSenderId: Constants.manifest.extra.messagingSenderId,
   appId: Constants.manifest.extra.appId,
 };
-
-const Firebase = firebase.initializeApp(firebaseConfig);
+const Firebase = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 export default Firebase;
