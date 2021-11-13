@@ -45,7 +45,7 @@ export default function ProfileScreen() {
   };
 
   const Call = async () => {
-    const dbRef = Firebase.database(URL).ref();
+    const dbRef = await Firebase.database(URL).ref();
     dbRef.child('users').child(user.uid).get().then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
@@ -62,15 +62,19 @@ export default function ProfileScreen() {
     Call();
   }, []);
 
-  const onSave = () => {
-    const database = Firebase.database(URL);
-    database.ref(`users/${user.uid}`)
-      .set({
-        name,
-        phoneNumber: number,
-      })
-      .then(() => notify('Profile updated'))
-      .catch((error) => notify(error));
+  const onSave = async () => {
+    if (name.length > 0 && !Number.isNaN(number) === true && number.length === 10) {
+      const database = await Firebase.database(URL);
+      database.ref(`users/${user.uid}`)
+        .set({
+          name,
+          phoneNumber: number,
+        })
+        .then(() => notify('Profile updated'))
+        .catch((error) => notify(error));
+    } else {
+      notify('Not valid name of phone number');
+    }
   };
 
   const handleSignOut = async () => {

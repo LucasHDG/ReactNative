@@ -9,6 +9,7 @@ import theme from '../styles/theme.style';
 import Firebase from '../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 import { IconButton } from '../components';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const URL = 'https://reactnativecontacts-97d1a-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  scrollView: {
+    marginBottom: 50,
   },
 });
 
@@ -92,6 +96,7 @@ export default function ContactsScreen() {
       </View>
       <SafeAreaView>
         <FlatList
+          style={styles.scrollView}
           data={ConctactList}
           renderItem={({ item }) => (
             <View style={styles.item}>
