@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Pressable, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import theme from '../styles/theme.style';
 
 const styles = StyleSheet.create({
   text: {
@@ -11,17 +13,17 @@ const styles = StyleSheet.create({
     minHeight: 42,
     borderRadius: 4,
     paddingHorizontal: 12,
+    marginBottom: 24,
   },
 });
 
 const Button = ({
   title,
-  backgroundColor = '#000',
-  titleColor = '#fff',
-  titleSize = 14,
+  backgroundColor,
+  titleColor,
+  titleSize,
   onPress,
   width = '100%',
-  containerStyle,
 }) => (
   <Pressable
     onPress={onPress}
@@ -34,7 +36,6 @@ const Button = ({
             backgroundColor,
             width,
           },
-          containerStyle,
         ];
       }
 
@@ -45,7 +46,6 @@ const Button = ({
           backgroundColor,
           width,
         },
-        containerStyle,
       ];
     }}
   >
@@ -54,5 +54,21 @@ const Button = ({
     </Text>
   </Pressable>
 );
+
+Button.propTypes = {
+  title: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string,
+  titleColor: PropTypes.string,
+  titleSize: PropTypes.number,
+  onPress: PropTypes.func.isRequired,
+  width: PropTypes.string,
+};
+
+Button.defaultProps = {
+  backgroundColor: theme.ONBACKTEXT,
+  titleColor: theme.BACK,
+  titleSize: 14,
+  width: '100%',
+};
 
 export default Button;

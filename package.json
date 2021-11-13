@@ -28,6 +28,7 @@
     "react-native-gesture-handler": "~1.10.2",
     "react-native-phone-call": "^1.0.9",
     "react-native-reanimated": "~2.2.0",
+    "react-native-root-siblings": "^4.1.1",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-web": "^0.17.5"
@@ -39,7 +40,9 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react-native-root-toast": "^3.3.0",
+    "react-navigation": "^4.4.4"
   },
   "private": true
 }

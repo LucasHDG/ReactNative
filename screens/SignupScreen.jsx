@@ -8,6 +8,7 @@ import {
 import { Button, InputField, ErrorMessage } from '../components';
 import Firebase from '../config/firebase';
 import theme from '../styles/theme.style';
+import Toast from 'react-native-root-toast';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +33,6 @@ export default function SignupScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
-  const [signupError, setSignupError] = useState('');
 
   const handlePasswordVisibility = () => {
     if (rightIcon === 'eye') {
@@ -44,13 +44,19 @@ export default function SignupScreen({ navigation }) {
     }
   };
 
+  const notify = (message) => {
+    Toast.show(message, {
+      duration: Toast.durations.SHORT,
+    });
+  };
+
   const onHandleSignup = async () => {
     try {
       if (email !== '' && password !== '') {
         await auth.createUserWithEmailAndPassword(email, password);
       }
     } catch (error) {
-      setSignupError(error.message);
+      notify(error.message);
     }
   };
 
@@ -94,16 +100,12 @@ export default function SignupScreen({ navigation }) {
         onChangeText={(text) => setPassword(text)}
         handlePasswordVisibility={handlePasswordVisibility}
       />
-      {signupError ? <ErrorMessage error={signupError} visible /> : null}
       <Button
         onPress={onHandleSignup}
         backgroundColor={theme.PRIMARY}
         title="Signup"
         titleColor={theme.BACK}
         titleSize={20}
-        containerStyle={{
-          marginBottom: 24,
-        }}
       />
       <Button
         onPress={() => navigation.navigate('Login')}

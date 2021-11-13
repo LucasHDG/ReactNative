@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View, ActivityIndicator } from 'react-native';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 import Firebase from '../config/firebase';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
@@ -38,7 +39,9 @@ export default function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {user ? <App /> : <AuthStack />}
+      <RootSiblingParent>
+        {user ? <App /> : <AuthStack />}
+      </RootSiblingParent>
     </NavigationContainer>
   );
 }
