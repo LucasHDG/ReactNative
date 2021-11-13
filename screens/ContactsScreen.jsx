@@ -70,9 +70,11 @@ export default function ContactsScreen() {
   const HandleCallButton = (e, number) => {
     e.preventDefault();
     Linking.openURL(`tel://${number}`);
-
-    // call(args).catch((error) => console.error(error));
   };
+
+  function concatNameNumber(name, number) {
+    return (`${name}  ${number}`);
+  }
 
   return (
     <View style={styles.container}>
@@ -94,7 +96,7 @@ export default function ContactsScreen() {
           renderItem={({ item }) => (
             <View style={styles.item}>
               <Button
-                title={item.name + item.phoneNumber}
+                title={concatNameNumber(item.name, item.phoneNumber)}
                 titleColor={theme.BACK}
                 color={theme.ONBACKTEXT}
                 onPress={(e) => HandleCallButton(e, item.phoneNumber)}
@@ -103,6 +105,7 @@ export default function ContactsScreen() {
               </Button>
             </View>
           )}
+          keyExtractor={(item, index) => index.toString()}
         />
       </SafeAreaView>
     </View>
